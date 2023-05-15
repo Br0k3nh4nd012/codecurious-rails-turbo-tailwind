@@ -1,0 +1,2 @@
+<%= turbo_stream.prepend "articles-list", partial: 'articles/article', locals: {article: @article} %>
+<%= turbo_stream.update "new-article", "" %>

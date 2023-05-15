@@ -1,0 +1,36 @@
+
+
+<!-- component -->
+<div class="h-screen md:flex">
+  <%= image_tag('art-workout-with-bg.gif', class: "relative overflow-hidden md:flex w-2/3 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden")  %>
+  <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
+    <div>
+      <h1 class="my-10 font-light text-4xl text-center">GENKI</h1>
+      <p class="text-center text-zinc-500 text-opacity-60 mb-5">Please sign in to you account!</p>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'p-8'}) do |f| %>
+        <div class="mb-4 field">
+          <%= f.label :email , class: "block text-gray-700 font-bold mb-2"%>
+          <%= f.email_field :email, autofocus: true,
+                            autocomplete: "email",
+                            class:"w-full py-2 px-3 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-500",
+                            placeholder:"Enter your email address" %>
+        </div>
+
+        <div class="field mb-4">
+          <%= f.label :password, class: "block text-gray-700 font-bold mb-2" %>
+          <%= f.password_field :password,
+                               autocomplete: "current-password",
+                               class: "w-full py-2 px-3 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-500",
+                               placeholder: "Enter your password" %>
+        </div>
+
+        <div class="actions flex items-center justify-between">
+          <%= link_to "Forgot your password?", new_password_path(resource_name),
+                      class: "text-gray-500 text-sm hover:text-blue-500 focus:outline-none focus:underline transition duration-150 ease-in-out"%><br />
+          <%= f.submit "Log in", class:"bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 ease-in-out" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
