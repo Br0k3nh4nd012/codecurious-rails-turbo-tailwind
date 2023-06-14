@@ -8,13 +8,16 @@ services:
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     ports:
-      - 6002:5432
+      - 6003:5432
   web:
+    container_name: code_curious
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle install && rake db:migrate && rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/codecurious
     ports:
-      - 3000:3000
+      - 3004:3000
     depends_on:
       - db
+    stdin_open: true
+    tty: true
