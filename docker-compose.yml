@@ -1,4 +1,8 @@
 version: '3'
+
+volumes:  
+  postgres_data: {} 
+
 services:
   db:
     image: postgres
@@ -6,18 +10,20 @@ services:
       POSTGRES_USER: docker 
       POSTGRES_PASSWORD: docker
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - 6003:5432
-  web:
-    container_name: code_curious
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle install && rake db:migrate && rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/codecurious
-    ports:
-      - 3004:3000
+  app:
+    build: 
+      context: .      
+      dockerfile: ./docker/app/Dockerfile 
     depends_on:
       - db
-    stdin_open: true
-    tty: true
+  nginx_server:
+    build:      
+      context: .      
+      dockerfile: ./docker/web/Dockerfile    
+    depends_on:      
+      - app    
+    ports:      
+      - 80:80

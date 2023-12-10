@@ -17,6 +17,12 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    if params[:send_file] == "1"
+      send_file Rails.root.join('public', '404.html')
+    else
+      send_data File.read(Rails.root.join('public', '404.html'))
+    end
+    
   end
 
   # POST /articles or /articles.json

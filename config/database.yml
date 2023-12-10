@@ -86,5 +86,5 @@ test:
 production:
   <<: *default
   database: codecurious_production
-  username: codecurious
-  password: <%= ENV["CODECURIOUS_DATABASE_PASSWORD"] %>
+  username: docker
+  password: docker
